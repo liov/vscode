@@ -1,0 +1,6 @@
+[submodule "vscode-git"]
+	path = vscode-git
+	url = https://github.com/hopeio/vscode-git.git
+[submodule "vscode-database"]
+	path = vscode-database
+	url = https://github.com/hopeio/vscode-database.git

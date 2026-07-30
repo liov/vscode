@@ -1,0 +1,27 @@
+---
+description: 
+globs:
+alwaysApply: true
+---
+
+# vscode-database：必编译与打包（Agent 强制执行）
+
+改动 `vscode-database/src/**`、`vscode-database/package.json`、`vscode-database/syntaxes/**`、`vscode-database/language-configuration.json` 后，在结束回复前**必须**执行
+
+```bash
+cd vscode-database && pnpm run package:vsix
+```
+
+# vscode-git：必编译与打包（Agent 强制执行）
+
+改动 `vscode-git/src/**`、`vscode-git/package.json` 后，在结束回复前**必须**执行
+
+```bash
+cd vscode-git && pnpm run package:vsix
+```
+
+# pnpm 11
+
+- `packageManager` 为 pnpm 11+ 时：`nodeLinker`、`allowBuilds` 等写在 `pnpm-workspace.yaml`（camelCase），**不要**放 `.npmrc`（v11 只从 `.npmrc` 读 auth/registry）。
+- `package.json#pnpm`（含旧 `onlyBuiltDependencies`）已被忽略，须迁到 `pnpm-workspace.yaml` 的 `allowBuilds`。
+- 本扩展 esbuild 从扁平 `node_modules/<pkg>` 拷 native 依赖，必须 `nodeLinker: hoisted`。

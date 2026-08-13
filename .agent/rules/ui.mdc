@@ -7,5 +7,7 @@ provider:
 
 # webview UI 惯例
 
-1. 右键/上下文菜单项的 label 用固定文案（与相邻菜单项风格一致，如 `Copy Branch Name`、`Copy Full Branch Name`），**不要**把分支名、路径、hash 等动态值内联进 label；动态信息通过复制行为本身或 `data-tip` 悬浮提示传达。
-2. webview 内悬浮提示不用原生 `title`（不可靠），统一用 `data-tip` + `bindTips`/`vtip` 机制，中文文案。
+1. 右键/上下文菜单项的 label 用固定文案（与相邻菜单项风格一致，如 `Copy Branch Name`、`Copy Full Branch Name`），**不要**把分支名、路径、hash 等动态值内联进 label；也**不要**在菜单顶部加显示作用对象（分支名/提交信息等）的标题行——作用对象由右键位置自明。动态信息通过复制行为本身或 `data-tip` 悬浮提示传达。
+2. webview 内悬浮提示不用原生 `title`（不可靠），统一用 `data-tip` + 事件委托 tooltip 机制，中文文案。
+3. vscode-git 的 webview 脚本/样式一律写在 `resources/webview/*.{js,css}` 独立文件（构建期 `scripts/check-webview.cjs` 全量语法校验），**禁止**在 TS 模板字符串内嵌 `<script>`（正则转义会被模板吞掉产生非法 JS，tsc 不报错、面板无声挂掉）。子面板初始数据走 `panelReady` → `init` 消息注入，不内插 HTML。
+4. webview 与 provider 之间新增消息类型必须两侧同批落地；架构与协议约定见 `vscode-git/docs/ARCHITECTURE.md`。

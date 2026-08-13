@@ -1,0 +1,11 @@
+---
+description:
+alwaysApply: true
+enabled: true
+provider:
+---
+
+# webview UI 惯例
+
+1. 右键/上下文菜单项的 label 用固定文案（与相邻菜单项风格一致，如 `Copy Branch Name`、`Copy Full Branch Name`），**不要**把分支名、路径、hash 等动态值内联进 label；动态信息通过复制行为本身或 `data-tip` 悬浮提示传达。
+2. webview 内悬浮提示不用原生 `title`（不可靠），统一用 `data-tip` + `bindTips`/`vtip` 机制，中文文案。

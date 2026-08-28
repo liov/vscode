@@ -1,0 +1,8 @@
+{
+	"terminal.integrated.env.windows": {
+		"PATH": "D:\\sdk\\Android\\platform-tools;D:\\sdk\\flutter\\bin;${env:PATH}",
+		"HTTP_PROXY": "http://10.48.113.10:8080",
+		"HTTPS_PROXY": "http://10.48.113.10:8080",
+		"NO_PROXY": "localhost,127.0.0.1,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.local,.lan"
+	},
+}

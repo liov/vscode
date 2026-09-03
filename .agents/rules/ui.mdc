@@ -14,4 +14,4 @@ provider:
 5. Git Diff 活动栏内 File History 与 Compare 空闲时**同时作为可折叠子视图**。一侧开始工作（选文件 / 选分支或提交对比）时收起另一侧（`vscodeGit.diffSidebar`）；切过去时对侧会话可恢复。Conflicts 仅在 `vscodeGit.hasConflicts` 时出现。
 6. Compare / Conflicts 文件列表与 Changed 一样提供树形 / 平铺切换（默认树状，目录可折叠），不要只做平铺路径。
 7. 冲突与历史 merge 的三方合并走 VS Code 原生 merge editor（`_open.mergeEditor`），入参必须是**工作区文件夹内**的 **file://**（普通仓写 `.git/vscode-git-merge`，linked worktree 写 `.vscode-git-merge`）；不要用 `git-diff:` 或 `os.tmpdir()`（Qoder getWorkspaceFolder 会崩），也不要调用 `git.openMergeEditor` 当成功入口（失败只弹窗不抛错）。打开后执行 `merge.columnLayout`，要竖向三列且 **Result 在中间**（Incoming | Result | Current），不要停在默认 mixed（上两栏、结果在下）。Changed / File History 单击文件走单栏或双栏 Diff；merge 提交用工具栏「三栏」显式打开三方，不要在单击时强制 merge editor。Conflict List 只负责列表与 Accept / 打开入口。不要自研 React 三栏 webview。
-8. Git Diff 子面板空态说明（「选择文件查看提交历史」「选择分支或提交进行对比」）放在工具栏**上方**，不要放在列表空态里，也不要再放一套重复按钮。
+8. Git Diff 子面板空态说明（「选择文件查看提交历史」「选择分支或提交进行对比」）放在工具栏**上方**；「重置」与说明同一行靠右，不要塞进工具栏末尾，也不要在列表空态里再放重复按钮。

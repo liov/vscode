@@ -13,4 +13,4 @@ provider:
 4. webview 与 provider 之间新增消息类型必须两侧同批落地；架构与协议约定见 `vscode-git/docs/ARCHITECTURE.md`。
 5. Git Diff 侧栏 File History / Compare / Conflicts 互斥：同一时间只展开一边（`setContext vscodeGit.diffSidebar` + views `when`），不要两个列表同时展开把当前面板挤到下面显示不全。Conflicts 仅在 `vscodeGit.hasConflicts` 时出现。
 6. Compare / Conflicts 文件列表与 Changed 一样提供树形 / 平铺切换（默认树状，目录可折叠），不要只做平铺路径。
-7. 冲突与历史 merge 的三方合并走 VS Code 原生 merge editor（`_open.mergeEditor`），入参必须是**工作区文件夹内**的 **file://**（普通仓写 `.git/vscode-git-merge`，linked worktree 写 `.vscode-git-merge`）；不要用 `git-diff:` 或 `os.tmpdir()`（Qoder getWorkspaceFolder 会崩），也不要调用 `git.openMergeEditor` 当成功入口（失败只弹窗不抛错）。Conflict List 只负责列表与 Accept / 打开入口。不要自研 React 三栏 webview。
+7. 冲突与历史 merge 的三方合并走 VS Code 原生 merge editor（`_open.mergeEditor`），入参必须是**工作区文件夹内**的 **file://**（普通仓写 `.git/vscode-git-merge`，linked worktree 写 `.vscode-git-merge`）；不要用 `git-diff:` 或 `os.tmpdir()`（Qoder getWorkspaceFolder 会崩），也不要调用 `git.openMergeEditor` 当成功入口（失败只弹窗不抛错）。Changed / File History 单击文件走单栏或双栏 Diff；merge 提交用工具栏「三栏」显式打开三方，不要在单击时强制 merge editor。Conflict List 只负责列表与 Accept / 打开入口。不要自研 React 三栏 webview。

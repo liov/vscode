@@ -11,6 +11,7 @@ provider:
 2. webview 内悬浮提示不用原生 `title`（不可靠），统一用 `data-tip` + 事件委托 tooltip 机制，中文文案。
 3. vscode-git 的 webview 脚本/样式一律写在 `resources/webview/*.{js,css}` 独立文件（构建期 `scripts/check-webview.cjs` 全量语法校验），**禁止**在 TS 模板字符串内嵌 `<script>`（正则转义会被模板吞掉产生非法 JS，tsc 不报错、面板无声挂掉）。子面板初始数据走 `panelReady` → `init` 消息注入，不内插 HTML。
 4. webview 与 provider 之间新增消息类型必须两侧同批落地；架构与协议约定见 `vscode-git/docs/ARCHITECTURE.md`。
-5. Git Diff 活动栏内 **File History 与 Compare 常驻为两个可折叠子视图**（点 VS Code 视图标题折叠），打开时只 `focus` 对应视图，**不要**用 `vscodeGit.diffSidebar` 互斥隐藏。Conflicts 仅在 `vscodeGit.hasConflicts` 时作为第三个子视图出现。
+5. Git Diff 活动栏内 File History 与 Compare 空闲时**同时作为可折叠子视图**。一侧开始工作（选文件 / 选分支或提交对比）时收起另一侧（`vscodeGit.diffSidebar`）；切过去时对侧会话可恢复。Conflicts 仅在 `vscodeGit.hasConflicts` 时出现。
 6. Compare / Conflicts 文件列表与 Changed 一样提供树形 / 平铺切换（默认树状，目录可折叠），不要只做平铺路径。
+7. 冲突与历史 merge 的三方合并走 VS Code 原生 merge editor（`_open.mergeEditor`），入参必须是**工作区文件夹内**的 **file://**（普通仓写 `.git/vscode-git-merge`，linked worktree 写 `.vscode-git-merge`）；不要用 `git-diff:` 或 `os.tmpdir()`（Qoder getWorkspaceFolder 会崩），也不要调用 `git.openMergeEditor` 当成功入口（失败只弹窗不抛错）。打开后执行 `merge.columnLayout`，要竖向三列且 **Result 在中间**（Incoming | Result | Current），不要停在默认 mixed（上两栏、结果在下）。Changed / File History 单击文件走单栏或双栏 Diff；merge 提交用工具栏「三栏」显式打开三方，不要在单击时强制 merge editor。Conflict List 只负责列表与 Accept / 打开入口。不要自研 React 三栏 webview。
 8. Git Diff 子面板空态说明（「选择文件查看提交历史」「选择分支或提交进行对比」）放在工具栏**上方**，不要放在列表空态里，也不要再放一套重复按钮。

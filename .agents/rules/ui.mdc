@@ -17,3 +17,4 @@ provider:
 8. Git Diff 子面板空态说明放在工具栏**上方**。补丁 / 单栏 / 双栏 / 三栏 / 树平铺 / 重置挂在**当前工作子视图**的 `view/title`（空闲挂 File History；Compare/Conflicts 工作时挂对应视图），不要另开可折叠的工具条子视图。
 9. Merge 提交 Changed 分组：默认 **Merge result** 用 `git diff-tree --remerge-diff`（冲突解决/手工改写），干净自动合并时该组为空，只展示两组 **Changes to …**。**Combined** 切换入口：Changed 标题栏与详情卡 hash 行用 **git-merge 图标按钮**（固定无字，说明走 `data-tip`）；点一下切 `--cc`，再点切回；**换提交强制回 remerge**。分组标题在 cc 模式显示为 Combined。禁止把 `--cc` 当作默认 Merge result。
 10. File History：默认 `git log --follow`（跨重命名，保留 merge 第二父上的改动链，不加 `--first-parent`）；tip 为 HEAD，仅显式 `uptoHash` 才截至某提交，**不要**把选中提交的 `hash` 升成 upto。Paths 首次筛选且未选分支时锚定当前分支；跨分支再点「显示所有分支」。勿加回逐 commit 的慢速 merge 过滤。
+11. 分支菜单文案：Rebase 用 **onto**（`Checkout and Rebase onto` / `Rebase … onto …`）；Merge 用 **into**（`Merge … into …` / `Checkout and Merge into …`），**不要**写 merge onto。

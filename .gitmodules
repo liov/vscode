@@ -4,3 +4,6 @@
 [submodule "vscode-database"]
 	path = vscode-database
 	url = https://github.com/hopeio/vscode-database.git
+[submodule "vscode-httpclient"]
+	path = vscode-httpclient
+	url = https://github.com/hopeio/vscode-httpclient.git

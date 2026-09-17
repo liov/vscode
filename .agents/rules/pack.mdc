@@ -20,6 +20,14 @@ cd vscode-database && pnpm run package:vsix
 cd vscode-git && pnpm run package:vsix
 ```
 
+# vscode-httpclient：必编译与打包（Agent 强制执行）
+
+改动 `vscode-httpclient/src/**`、`vscode-httpclient/package.json` 后，在结束回复前**必须**执行
+
+```bash
+cd vscode-httpclient && pnpm run package:vsix
+```
+
 # pnpm 11
 
 - `packageManager` 为 pnpm 11+ 时：`nodeLinker`、`allowBuilds` 等写在 `pnpm-workspace.yaml`（camelCase），**不要**放 `.npmrc`（v11 只从 `.npmrc` 读 auth/registry）。

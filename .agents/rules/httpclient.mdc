@@ -6,3 +6,4 @@
 - form 字段存盘为 JSON 数组时，插值必须**逐字段**做，禁止对整段 JSON 字符串做 `interpolate`（值含引号/反斜杠会弄坏 JSON）；文件路径不要插值。
 - **urlencoded** 才是 `application/x-www-form-urlencoded`；与 form-data UI/文案要区分清楚。
 - JSON 裸数字粘连 `103{{$timestamp}}`（插值为数字字符拼接）与 js-object 互转必须写成 `Number("103"+$timestamp)`，**禁止**用算术 `103+$timestamp`（语义不等价）。
+- js-object ↔ XML：裸占位用 `bare="true"`；`bare` 内容一律还原为 BarePlaceholder（含 `103{{$ts}}`）；对象序列化一律包 `<root>`，避免单 key 丢字段名。

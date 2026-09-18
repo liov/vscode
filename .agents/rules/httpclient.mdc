@@ -7,3 +7,4 @@
 - **urlencoded** 才是 `application/x-www-form-urlencoded`；与 form-data UI/文案要区分清楚。
 - JSON 裸数字粘连 `103{{$timestamp}}`（插值为数字字符拼接）与 js-object 互转必须写成 `Number("103"+$timestamp)`，**禁止**用算术 `103+$timestamp`（语义不等价）。
 - js-object ↔ XML：裸占位用 `bare="true"`；`bare` 内容一律还原为 BarePlaceholder（含 `103{{$ts}}`）；对象序列化一律包 `<root>`，避免单 key 丢字段名。
+- 脚本三阶段：准备变量（插值前，无 `hc.request`）→ 内置插值 → 前置（已替换 request，不再自动重插）→ 发送 → 后置。

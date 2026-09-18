@@ -5,3 +5,4 @@
 - form-data 字段类型：**Text** / **File**。File 只存本机 `filePath`/`fileName`（不写 base64 进 api.json）；发送时宿主读文件再 `FormData.append`。
 - form 字段存盘为 JSON 数组时，插值必须**逐字段**做，禁止对整段 JSON 字符串做 `interpolate`（值含引号/反斜杠会弄坏 JSON）；文件路径不要插值。
 - **urlencoded** 才是 `application/x-www-form-urlencoded`；与 form-data UI/文案要区分清楚。
+- JSON 裸数字粘连 `103{{$timestamp}}`（插值为数字字符拼接）与 js-object 互转必须写成 `Number("103"+$timestamp)`，**禁止**用算术 `103+$timestamp`（语义不等价）。
